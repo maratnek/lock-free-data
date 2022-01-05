@@ -21,9 +21,13 @@ conan_cmake_run(REQUIRES benchmark/1.6.0@
 
 add_executable(lfdata main.cpp)
 
-# lock free stack bench
-add_executable(lf-stack-bench lf-stack-bench.cpp)
-target_link_libraries(lf-stack-bench CONAN_PKG::benchmark)
+# lock free stack bench with leak and empty problem
+add_executable(lf-stack-bench-leak lf-stack-bench.leak.cpp)
+target_link_libraries(lf-stack-bench-leak CONAN_PKG::benchmark)
+
+# lock free stack bench with leak 
+add_executable(lf-stack-shared-bench-leak lf-stack-shared-bench.leak.cpp)
+target_link_libraries(lf-stack-shared-bench-leak CONAN_PKG::benchmark)
 
 include(CTest)
 enable_testing()
