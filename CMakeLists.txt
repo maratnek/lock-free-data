@@ -29,6 +29,13 @@ target_link_libraries(lf-stack-bench-leak CONAN_PKG::benchmark)
 add_executable(lf-stack-shared-bench-leak lf-stack-shared-bench.leak.cpp)
 target_link_libraries(lf-stack-shared-bench-leak CONAN_PKG::benchmark)
 
+add_executable(ABA ABA.cpp)
+
+
+# lock free stack bench atomic_shared_ptr 
+# add_executable(lf-stack-atomic-shared-ptr-bench lf-stack-atomic-shared-ptr-bench.cpp)
+# target_link_libraries(lf-stack-atomic-shared-ptr-bench CONAN_PKG::benchmark)
+
 include(CTest)
 enable_testing()
 add_test(NAME lf-stack-bench COMMAND lf-stack-bench)
