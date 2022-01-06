@@ -12,7 +12,7 @@ auto l_thread_data = [](TLoadFunc func_load, size_t block_count = 1, size_t add_
     /// create several transactions
     auto conc_threads = std::thread::hardware_concurrency();
     conc_threads += add_threads;
-    std::cout << "Real thread count: " << conc_threads << std::endl;
+    // std::cout << "Real thread count: " << conc_threads << std::endl;
     auto interval = block_count / conc_threads;
     for (size_t ith = 0; ith < conc_threads; ++ith)
     {

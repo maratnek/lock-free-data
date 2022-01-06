@@ -2,9 +2,10 @@
 
 #include <iostream>
 #include "threads-utils.hpp"
-#include "lf-stack-atomic-shared-ptr.hpp"
+#include "lf-stack-shared-hazard.hpp"
 
 static void BM_LFStack(benchmark::State& state) {
+    state.SetItemsProcessed(1000);
     for (auto _ : state) 
     {
         lockFreeStack<size_t> lfStack;
@@ -26,7 +27,6 @@ static void BM_LFStack(benchmark::State& state) {
             res += result;
         };
 
-        // size_t count = 12'000'000;
         size_t count = 16'000'000;
         l_thread_data<decltype(l_func_load)>(l_func_load, count);
         std::cout << "Result " << res << std::endl;

@@ -32,7 +32,7 @@ static void BM_LFStack(benchmark::State& state) {
         std::cout << "Result " << res << std::endl;
     }
 }
-BENCHMARK(BM_LFStack);
+BENCHMARK(BM_LFStack)->Arg(1)->Unit(benchmark::kMillisecond);
 
 #include "thread-safe-stack.hpp"
 static void BM_ThreadSafeStack(benchmark::State& state) {
@@ -63,6 +63,6 @@ static void BM_ThreadSafeStack(benchmark::State& state) {
         std::cout << "Result " << res << std::endl;
     }
 }
-BENCHMARK(BM_ThreadSafeStack);
+BENCHMARK(BM_ThreadSafeStack)->Arg(1)->Unit(benchmark::kMillisecond);
 // Run the benchmark
 BENCHMARK_MAIN();

@@ -12,7 +12,7 @@ if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
 endif()
 
 include(${CMAKE_BINARY_DIR}/conan.cmake)
-conan_cmake_run(REQUIRES benchmark/1.6.0@ 
+conan_cmake_run(REQUIRES benchmark/1.6.0@ boost/1.78.0@
         GENERATORS cmake cmake_paths cmake_find_package
         BUILD missing
         BUILD_TYPE Release 
@@ -29,12 +29,17 @@ target_link_libraries(lf-stack-bench-leak CONAN_PKG::benchmark)
 add_executable(lf-stack-shared-bench-leak lf-stack-shared-bench.leak.cpp)
 target_link_libraries(lf-stack-shared-bench-leak CONAN_PKG::benchmark)
 
-add_executable(ABA ABA.cpp)
-
-
 # lock free stack bench atomic_shared_ptr 
 # add_executable(lf-stack-atomic-shared-ptr-bench lf-stack-atomic-shared-ptr-bench.cpp)
 # target_link_libraries(lf-stack-atomic-shared-ptr-bench CONAN_PKG::benchmark)
+
+# hazard 
+add_executable(lf-stack-hazard-bench lf-stack-shared-hazard-bench.cpp)
+target_link_libraries(lf-stack-hazard-bench CONAN_PKG::benchmark)
+
+# boost
+add_executable(lf-stack-boost-bench lf-stack-boost-bench.cpp)
+target_link_libraries(lf-stack-boost-bench CONAN_PKG::benchmark CONAN_PKG::boost)
 
 include(CTest)
 enable_testing()
