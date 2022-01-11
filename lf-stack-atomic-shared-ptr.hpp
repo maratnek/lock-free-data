@@ -19,14 +19,12 @@ private:
     };
     TAtomicSharedPtr head;
 public:
-    void push(T const& data)
-    {
+    void push(T const& data) {
         std::shared_ptr<node> const new_node=std::make_shared<node>(data);
         new_node->next=head.load();
         while(!head.compare_exchange_weak(new_node->next,new_node));
     }
-    std::shared_ptr<T> pop()
-    {
+    std::shared_ptr<T> pop() {
         std::shared_ptr<node> old_head=head.load();
         while(old_head && !head.compare_exchange_weak(
                   old_head,old_head->next.load()));

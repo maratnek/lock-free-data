@@ -4,9 +4,10 @@
 #include "threads-utils.hpp"
 #include "lf-stack-shared-hazard.hpp"
 
-static void BM_LFStack(benchmark::State& state) {
+static void BM_LFStack(benchmark::State &state)
+{
     state.SetItemsProcessed(1000);
-    for (auto _ : state) 
+    for (auto _ : state)
     {
         lockFreeStack<size_t> lfStack;
         std::atomic<size_t> res = 0;
@@ -35,8 +36,9 @@ static void BM_LFStack(benchmark::State& state) {
 BENCHMARK(BM_LFStack)->Arg(1)->Unit(benchmark::kMillisecond);
 
 #include "thread-safe-stack.hpp"
-static void BM_ThreadSafeStack(benchmark::State& state) {
-    for (auto _ : state) 
+static void BM_ThreadSafeStack(benchmark::State &state)
+{
+    for (auto _ : state)
     {
         threadsafe_stack<size_t> lfStack;
         std::atomic<size_t> res = 0;

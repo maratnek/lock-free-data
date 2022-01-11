@@ -4,8 +4,9 @@
 #include "threads-utils.hpp"
 #include "lf-stack-atomic-shared-ptr.hpp"
 
-static void BM_LFStack(benchmark::State& state) {
-    for (auto _ : state) 
+static void BM_LFStack(benchmark::State &state)
+{
+    for (auto _ : state)
     {
         lockFreeStack<size_t> lfStack;
         std::atomic<size_t> res = 0;
@@ -26,7 +27,6 @@ static void BM_LFStack(benchmark::State& state) {
             res += result;
         };
 
-        // size_t count = 12'000'000;
         size_t count = 16'000'000;
         l_thread_data<decltype(l_func_load)>(l_func_load, count);
         std::cout << "Result " << res << std::endl;
@@ -35,8 +35,9 @@ static void BM_LFStack(benchmark::State& state) {
 BENCHMARK(BM_LFStack)->Arg(1)->Unit(benchmark::kMillisecond);
 
 #include "thread-safe-stack.hpp"
-static void BM_ThreadSafeStack(benchmark::State& state) {
-    for (auto _ : state) 
+static void BM_ThreadSafeStack(benchmark::State &state)
+{
+    for (auto _ : state)
     {
         threadsafe_stack<size_t> lfStack;
         std::atomic<size_t> res = 0;
@@ -57,7 +58,6 @@ static void BM_ThreadSafeStack(benchmark::State& state) {
             res += result;
         };
 
-        // size_t count = 12'000'000;
         size_t count = 16'000'000;
         l_thread_data<decltype(l_func_load)>(l_func_load, count);
         std::cout << "Result " << res << std::endl;

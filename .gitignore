@@ -1,4 +1,5 @@
 build
+build-xcode
 
 # Prerequisites
 *.d
